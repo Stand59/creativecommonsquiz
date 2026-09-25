@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Decode the License · Creative Commons Practice</title>
+    <style>
+      :root {
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        color: #172d31;
+        background: #f4f7f2;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at 85% 0%, #dceee8, transparent 40%), #f4f7f2;
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+      }
+      a {
+        color: #176c61;
+      }
+      header {
+        max-width: 1000px;
+        margin: auto;
+        padding: 30px 22px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .brand {
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .logo {
+        display: grid;
+        place-items: center;
+        border: 2px solid #183c3a;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        letter-spacing: -0.12em;
+        padding-right: 3px;
+        font-size: 15px;
+      }
+      .header-note {
+        font-size: 13px;
+        color: #56716d;
+      }
+      main {
+        max-width: 800px;
+        margin: 42px auto 70px;
+        padding: 0 22px;
+      }
+      .eyebrow {
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: #187969;
+      }
+      .intro h1 {
+        font-size: clamp(38px, 7vw, 68px);
+        letter-spacing: -0.06em;
+        line-height: 1.02;
+        margin: 15px 0 18px;
+      }
+      .intro p,
+      .sub {
+        color: #536a65;
+        font-size: 17px;
+        line-height: 1.55;
+      }
+      .intro p {
+        max-width: 600px;
+      }
+      .card {
+        background: white;
+        border: 1px solid #dce7e0;
+        box-shadow: 0 20px 55px #25453712;
+        border-radius: 25px;
+        padding: clamp(22px, 4vw, 38px);
+        margin-top: 30px;
+      }
+      .intro .card {
+        margin-top: 36px;
+      }
+      .rounds {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin: 25px 0;
+      }
+      .round {
+        border: 1px solid #d9e6dd;
+        border-radius: 17px;
+        padding: 18px;
+        background: #f8fbf8;
+      }
+      .round strong {
+        display: block;
+        font-size: 18px;
+        margin-bottom: 6px;
+      }
+      .round span {
+        font-size: 14px;
+        color: #59736b;
+        line-height: 1.4;
+      }
+      .btn {
+        border: 0;
+        border-radius: 12px;
+        background: #176c61;
+        color: white;
+        padding: 15px 23px;
+        font-weight: 800;
+        transition:
+          transform 0.15s,
+          background 0.15s;
+      }
+      .btn:hover {
+        background: #125449;
+        transform: translateY(-1px);
+      }
+      .btn:focus-visible,
+      .choice:focus-visible {
+        outline: 3px solid #efb74f;
+        outline-offset: 3px;
+      }
+      .secondary {
+        background: #e7f1ec;
+        color: #14564d;
+      }
+      .secondary:hover {
+        background: #d2e6da;
+      }
+      .topline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 20px;
+        color: #4d6e66;
+        font-weight: 700;
+        font-size: 13px;
+      }
+      .pill {
+        background: #e5f3ed;
+        border-radius: 50px;
+        padding: 8px 12px;
+        color: #176c61;
+      }
+      .progress {
+        height: 8px;
+        border-radius: 20px;
+        background: #e7ede7;
+        overflow: hidden;
+      }
+      .progress span {
+        display: block;
+        height: 100%;
+        background: #25a784;
+        transition: width 0.35s;
+      }
+      h2 {
+        font-size: clamp(26px, 4vw, 36px);
+        letter-spacing: -0.035em;
+        line-height: 1.16;
+        margin: 25px 0 9px;
+      }
+      .choices {
+        display: grid;
+        gap: 11px;
+        margin-top: 23px;
+      }
+      .choice {
+        width: 100%;
+        text-align: left;
+        border: 1.5px solid #d9e4dc;
+        background: #fff;
+        border-radius: 14px;
+        padding: 16px 18px;
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        line-height: 1.35;
+        font-weight: 650;
+        color: #243d3b;
+        transition:
+          border-color 0.15s,
+          background 0.15s,
+          transform 0.15s;
+      }
+      .choice:not(:disabled):hover {
+        border-color: #53a99c;
+        background: #f5fbf8;
+        transform: translateX(3px);
+      }
+      .choice:disabled {
+        cursor: default;
+      }
+      .letter {
+        background: #ecf3ed;
+        border-radius: 9px;
+        min-width: 30px;
+        height: 30px;
+        display: grid;
+        place-items: center;
+        font-size: 13px;
+        color: #427267;
+        font-weight: 900;
+      }
+      .choice.correct {
+        border-color: #2d9c74;
+        background: #e8f7ed;
+      }
+      .choice.wrong {
+        border-color: #d88169;
+        background: #fff0eb;
+      }
+      .feedback {
+        border-radius: 16px;
+        margin-top: 22px;
+        padding: 20px 22px;
+        line-height: 1.55;
+      }
+      .feedback.good {
+        background: #e8f7ed;
+        border: 1px solid #a9d9b9;
+      }
+      .feedback.bad {
+        background: #fff0eb;
+        border: 1px solid #ebc0af;
+      }
+      .feedback strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 18px;
+      }
+      .feedback p {
+        margin: 5px 0 0;
+        color: #344f49;
+      }
+      .feedback .btn {
+        margin-top: 17px;
+      }
+      .score {
+        font-size: 58px;
+        letter-spacing: -0.07em;
+        font-weight: 900;
+        color: #176c61;
+        line-height: 1.1;
+        margin: 20px 0 3px;
+      }
+      .review {
+        padding-left: 18px;
+        line-height: 1.6;
+        color: #3e5851;
+      }
+      .review li {
+        margin: 8px 0;
+      }
+      .footer {
+        font-size: 13px;
+        color: #617972;
+        line-height: 1.5;
+        margin-top: 26px;
+      }
+      #app[hidden] {
+        display: none;
+      }
+      @media (max-width: 550px) {
+        header {
+          padding-top: 20px;
+        }
+        .header-note {
+          display: none;
+        }
+        main {
+          margin-top: 35px;
+        }
+        .rounds {
+          grid-template-columns: 1fr;
+        }
+        .card {
+          padding: 22px;
+        }
+        .choice {
+          padding: 13px;
+        }
+      }
+      .study-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        margin: 25px 0;
+      }
+      .flip-card {
+        perspective: 900px;
+        border: 0;
+        background: none;
+        padding: 0;
+        height: 150px;
+        text-align: center;
+        color: #173b35;
+      }
+      .flip-inner {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.5s;
+        transform-style: preserve-3d;
+      }
+      .flip-card.flipped .flip-inner {
+        transform: rotateY(180deg);
+      }
+      .flip-face {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 7px;
+        border-radius: 17px;
+        border: 1px solid #c9e0d3;
+        background: #e9f6ed;
+        padding: 15px;
+        backface-visibility: hidden;
+      }
+      .flip-face.back {
+        transform: rotateY(180deg);
+        background: #176c61;
+        border-color: #176c61;
+        color: #fff;
+      }
+      .flip-face strong {
+        font-size: 28px;
+      }
+      .flip-face.back strong {
+        font-size: 19px;
+      }
+      .flip-face span {
+        font-size: 12px;
+        line-height: 1.35;
+      }
+      .guide {
+        margin-top: 25px;
+        padding: 20px 23px;
+        border-radius: 17px;
+        background: #eaf3ec;
+        color: #36584c;
+      }
+      .guide h3 {
+        margin: 0 0 11px;
+        font-size: 15px;
+      }
+      .guide ul {
+        margin: 0;
+        padding-left: 19px;
+        font-size: 13px;
+        line-height: 1.65;
+      }
+      .guide li {
+        margin: 3px 0;
+      }
+      @media (max-width: 550px) {
+        .study-grid {
+          gap: 9px;
+        }
+        .flip-card {
+          height: 160px;
+        }
+        .flip-face {
+          padding: 10px;
+        }
+      }
+
+      .reuse-note {
+        max-width: 800px;
+        margin: 40px auto 24px;
+        padding: 0 22px;
+        color: #617972;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="brand">Decode the License</div>
+      <div class="header-note">Creative Commons practice game</div>
+    </header>
+    <main id="app" aria-live="polite"></main>
+
+    <footer class="reuse-note">
+      AI was used to create the game, including questions, explanations, and
+      code. Copy and adapt freely. Any copyright I hold is dedicated under
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>.
+      “Creative Commons” is the topic of the game, not its license. Locate the
+      source code at <a href="">Github</a>.
+    </footer>
+
+    <script>
+      const elements = [
+        {
+          term: "BY",
+          name: "Attribution",
+          meaning: "Give credit to the creator.",
+        },
+        {
+          term: "SA",
+          name: "ShareAlike",
+          meaning:
+            "Share adaptations you distribute under the same or a compatible license.",
+        },
+        {
+          term: "NC",
+          name: "NonCommercial",
+          meaning:
+            "Use is limited to purposes that are not primarily intended for commercial advantage or monetary compensation.",
+        },
+        {
+          term: "ND",
+          name: "NoDerivatives",
+          meaning: "Do not share adapted versions of the work.",
+        },
+      ];
+      const licenses = [
+        {
+          id: "CC BY",
+          name: "Attribution",
+          description:
+            "Credit the creator. You may share adaptations and use the work commercially.",
+          pieces: ["BY"],
+        },
+        {
+          id: "CC BY-SA",
+          name: "Attribution–ShareAlike",
+          description:
+            "Credit the creator. You may adapt and use the work commercially; share adaptations under the same or a compatible license.",
+          pieces: ["BY", "SA"],
+        },
+        {
+          id: "CC BY-NC",
+          name: "Attribution–NonCommercial",
+          description:
+            "Credit the creator. You may share adaptations, but use must be noncommercial; no ShareAlike requirement.",
+          pieces: ["BY", "NC"],
+        },
+        {
+          id: "CC BY-ND",
+          name: "Attribution–NoDerivatives",
+          description:
+            "Credit the creator. Commercial sharing of unchanged copies is allowed, but adapted versions may not be shared.",
+          pieces: ["BY", "ND"],
+        },
+        {
+          id: "CC BY-NC-SA",
+          name: "Attribution–NonCommercial–ShareAlike",
+          description:
+            "Credit the creator. Noncommercial adaptations may be shared under the same or a compatible license.",
+          pieces: ["BY", "NC", "SA"],
+        },
+        {
+          id: "CC BY-NC-ND",
+          name: "Attribution–NonCommercial–NoDerivatives",
+          description:
+            "Credit the creator. Share only unchanged copies, and only for noncommercial purposes.",
+          pieces: ["BY", "NC", "ND"],
+        },
+      ];
+      const scenarios = [
+        {
+          answer: "CC BY",
+          question: "Which license fits this description?",
+          detail:
+            "People can adapt and share the work, including commercially. They must give credit, with no added NC or SA condition.",
+        },
+        {
+          answer: "CC BY-SA",
+          question: "Which license fits this description?",
+          detail:
+            "People can adapt and share the work, including commercially. Shared adaptations must use the same or a compatible license.",
+        },
+        {
+          answer: "CC BY-NC",
+          question: "Which license fits this description?",
+          detail:
+            "People can adapt and share the work for noncommercial purposes. They can choose a different license for their adaptation.",
+        },
+        {
+          answer: "CC BY-ND",
+          question: "Which license fits this description?",
+          detail:
+            "People may share unchanged copies, even commercially. They may not share an adapted version under this license.",
+        },
+        {
+          answer: "CC BY-NC-SA",
+          question: "Which license fits this description?",
+          detail:
+            "People may share adaptations for noncommercial purposes, but shared adaptations must use the same or a compatible license.",
+        },
+        {
+          answer: "CC BY-NC-ND",
+          question: "Which license fits this description?",
+          detail:
+            "People may share unchanged copies for noncommercial purposes. Sharing an adaptation is not allowed under this license.",
+        },
+      ];
+      let phase = "intro",
+        index = 0,
+        score = 0,
+        selected = null,
+        misses = [],
+        abbrevOrder = [],
+        licenseOrder = [],
+        choiceOrder = [];
+      const app = document.getElementById("app");
+      const shuffle = (a) => [...a].sort(() => Math.random() - 0.5);
+      const esc = (s) =>
+        String(s).replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      function start() {
+        phase = "learn";
+        index = 0;
+        score = 0;
+        selected = null;
+        misses = [];
+        abbrevOrder = shuffle(elements);
+        licenseOrder = shuffle(scenarios);
+        render();
+      }
+      function current() {
+        return phase === "abbr" ? abbrevOrder[index] : licenseOrder[index];
+      }
+      function next() {
+        selected = null;
+        index++;
+        if (phase === "abbr" && index === 4) {
+          phase = "license";
+          index = 0;
+        } else if (phase === "license" && index === 6) {
+          phase = "done";
+        }
+        render();
+      }
+      function choose(value) {
+        if (selected !== null) return;
+        selected = value;
+        const right = phase === "abbr" ? current().name : current().answer;
+        if (value === right) score++;
+        else
+          misses.push({
+            phase,
+            question: phase === "abbr" ? current().term : current().detail,
+            answer: right,
+          });
+        render();
+      }
+      function explainChoice(picked, right) {
+        if (phase === "abbr") {
+          const chosen = elements.find((e) => e.name === picked);
+          return `${picked} means ${chosen.meaning} The abbreviation ${current().term} stands for ${right}: ${current().meaning}`;
+        }
+        const chosen = licenses.find((l) => l.id === picked),
+          actual = licenses.find((l) => l.id === right);
+        const added = chosen.pieces.filter((x) => !actual.pieces.includes(x));
+        const missing = actual.pieces.filter((x) => !chosen.pieces.includes(x));
+        const notes = [];
+        if (added.length)
+          notes.push(
+            `${picked} adds ${added.map((x) => `${x} (${elements.find((e) => e.term === x).name})`).join(" and ")}, which the description does not require.`,
+          );
+        if (missing.length)
+          notes.push(
+            `${picked} is missing ${missing.map((x) => `${x} (${elements.find((e) => e.term === x).name})`).join(" and ")}, which the description requires.`,
+          );
+        return `${notes.join(" ")} ${right} means: ${actual.description}`;
+      }
+      function guide() {
+        return `<aside class="guide" aria-label="Abbreviation guide"><h3>Quick reference · What the letters mean</h3><ul>${elements.map((e) => `<li><strong>${e.term} · ${e.name}:</strong> ${esc(e.meaning)}</li>`).join("")}</ul></aside>`;
+      }
+      function study() {
+        app.innerHTML = `<div class="eyebrow">Before round 1 · Meet the four elements</div><h1 style="font-size:clamp(35px,6vw,55px);letter-spacing:-.05em;margin:15px 0">Learn the abbreviations</h1><p class="sub">Select each card to turn it over and see what the letters mean. Flip them back to quiz yourself.</p><div class="study-grid">${elements.map((e) => `<button class="flip-card" type="button" aria-label="${e.term}: show meaning" aria-pressed="false"><span class="flip-inner"><span class="flip-face"><strong>${e.term}</strong><span>Click to reveal</span></span><span class="flip-face back"><strong>${e.name}</strong><span>${esc(e.meaning)}</span></span></span></button>`).join("")}</div><button class="btn" id="begin">Begin the quiz →</button>${guide()}`;
+        app.querySelectorAll(".flip-card").forEach(
+          (card, i) =>
+            (card.onclick = () => {
+              const flipped = card.classList.toggle("flipped");
+              card.setAttribute("aria-pressed", String(flipped));
+              card.setAttribute(
+                "aria-label",
+                `${elements[i].term}: ${flipped ? "hide" : "show"} meaning`,
+              );
+            }),
+        );
+        document.getElementById("begin").onclick = () => {
+          phase = "abbr";
+          render();
+        };
+      }
+      function render() {
+        if (phase === "learn") {
+          study();
+          return;
+        }
+        if (phase === "intro") {
+          app.innerHTML = `<section class="intro"><div class="eyebrow">A quick study game</div><h1>Can you decode a CC license?</h1><p>Learn the four building blocks, then identify all six Creative Commons licenses from what people can do with a work.</p><div class="card"><div class="eyebrow">Two rounds · 10 questions</div><div class="rounds"><div class="round"><strong>01 · The abbreviations</strong><span>Match BY, SA, NC, and ND to their meanings.</span></div><div class="round"><strong>02 · The licenses</strong><span>Read a description and pick the license it describes.</span></div></div><button class="btn" id="start">Start playing →</button></div><p class="footer">Practice guide: <a href="https://creativecommons.org/cc-licenses/" target="_blank" rel="noopener noreferrer">Creative Commons license descriptions ↗</a></p></section>`;
+          document.getElementById("start").onclick = start;
+          return;
+        }
+        if (phase === "done") {
+          app.innerHTML = `<div class="eyebrow">Round complete</div><h1 style="font-size:clamp(36px,6vw,60px);letter-spacing:-.05em;margin:14px 0">Nicely done.</h1><div class="card"><div class="eyebrow">Your result</div><div class="score">${score} / 10</div><p class="sub">${score === 10 ? "You recognized every abbreviation and license." : score >= 7 ? "A solid start. Review the ones you missed and try again." : "Review the four elements, then give it another try."}</p>${misses.length ? `<h2 style="font-size:23px">Review your misses</h2><ul class="review">${misses.map((m) => `<li><strong>${esc(m.question)}</strong> → ${esc(m.answer)}</li>`).join("")}</ul>` : ""}<button class="btn" id="again">Play again ↺</button></div><p class="footer">CC0 is a public domain dedication, not one of the six CC licenses in this game. License details and exceptions can be more nuanced than these practice prompts. <a href="https://creativecommons.org/cc-licenses/" target="_blank" rel="noopener noreferrer">Explore the official guide ↗</a></p>`;
+          document.getElementById("again").onclick = start;
+          return;
+        }
+        const q = current(),
+          abbr = phase === "abbr",
+          right = abbr ? q.name : q.answer,
+          number = abbr ? index + 1 : index + 5;
+        if (selected === null)
+          choiceOrder = shuffle(
+            abbr
+              ? elements.map((e) => e.name)
+              : licenses
+                  .filter(
+                    (l) =>
+                      l.id === right ||
+                      l.pieces.length ===
+                        licenses.find((x) => x.id === right).pieces.length,
+                  )
+                  .map((l) => l.id),
+          );
+        if (!abbr && choiceOrder.length < 4) {
+          const extra = shuffle(
+            licenses.map((l) => l.id).filter((id) => !choiceOrder.includes(id)),
+          );
+          choiceOrder = shuffle([
+            ...choiceOrder,
+            ...extra.slice(0, 4 - choiceOrder.length),
+          ]);
+        }
+        if (!abbr && choiceOrder.length > 4)
+          choiceOrder = shuffle([
+            right,
+            ...shuffle(choiceOrder.filter((x) => x !== right)).slice(0, 3),
+          ]);
+        app.innerHTML = `<div class="topline"><span class="pill">${abbr ? "Round 1 · Abbreviations" : "Round 2 · Licenses"}</span><span>Question ${number} of 10 · ${score} correct</span></div><div class="progress" role="progressbar" aria-label="Game progress" aria-valuenow="${number - 1}" aria-valuemin="0" aria-valuemax="10"><span style="width:${(number - 1) * 10}%"></span></div><div class="card"><div class="eyebrow">${abbr ? "What does it stand for?" : "Find the matching license"}</div><h2>${abbr ? `What does <span style="color:#187969">${esc(q.term)}</span> mean?` : esc(q.question)}</h2>${abbr ? '<p class="sub">Choose the full name of this CC element.</p>' : `<p class="sub">${esc(q.detail)}</p>`}<div class="choices" role="group" aria-label="Answer choices">${choiceOrder.map((value, i) => `<button type="button" class="choice ${selected !== null ? (value === right ? "correct" : value === selected ? "wrong" : "") : ""}" data-value="${esc(value)}" ${selected !== null ? "disabled" : ""}><span class="letter">${"ABCD"[i]}</span><span>${esc(value)}</span></button>`).join("")}</div>${selected !== null ? `<div class="feedback ${selected === right ? "good" : "bad"}" role="status"><strong>${selected === right ? "Correct!" : "Not quite. The answer is " + esc(right) + "."}</strong><p>${esc(selected === right ? (abbr ? `${q.term} means ${q.name}. ${q.meaning}` : `${right} means: ${licenses.find((l) => l.id === right).description}`) : explainChoice(selected, right))}</p><button class="btn" id="next">${number === 10 ? "See results →" : number === 4 ? "Start license round →" : "Next question →"}</button></div>` : ""}</div><details class="hint">
+  <summary>Need a hint? Show the abbreviation guide</summary>
+  ${guide()}
+</details>`;
+        if (selected === null)
+          app
+            .querySelectorAll(".choice")
+            .forEach((b) => (b.onclick = () => choose(b.dataset.value)));
+        else document.getElementById("next").onclick = next;
+      }
+      render();
+    </script>
+  </body>
+</html>
